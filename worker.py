@@ -1,6 +1,7 @@
 import time
 from telebot import types
 import random
+from googletrans import Translator
 
 class Worker:
 
@@ -180,3 +181,11 @@ class Worker:
             self.question = ""
             self.BOT.send_message(_message.from_user.id, "Удалено")            
             self.BOT = None
+
+    def Translate(self, _bot, _message):
+        try:
+            translator = Translator()
+            trans = translator.translate(_message.text[3:], src="uz", dest="ru")
+            _bot.send_message(_message.chat.id, trans.text, reply_to_message_id=_message.message_id)
+        except Exception:
+            _bot.send_message(_message.chat.id, "Не могу перевести")

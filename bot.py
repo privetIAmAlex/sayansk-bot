@@ -2,7 +2,7 @@ import telebot
 from worker import Worker
 import time
 
-bot = telebot.TeleBot("492864827:AAFc_KDXUf4-06pZqstFv6HaPO5m5LaruvE")
+bot = telebot.TeleBot("423190741:AAG1Y_CcW6_A0VX33XBkVGGMtB-tYyYMOpU")
 worker = Worker()
 
 @bot.message_handler(commands=["create"])
@@ -33,6 +33,9 @@ def handle_message(message):
         else:
             worker.GetCount(bot, message.chat.id)
         return 
+
+    if "uz" in message.text[:3].lower():
+        worker.Translate(bot, message)
 
     worker.Count(message.from_user.id)
     if worker.FindBadWord(message) == True:
